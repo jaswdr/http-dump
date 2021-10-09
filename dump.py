@@ -57,10 +57,12 @@ def after_request(resp):
     return resp
 
 
-@app.route("/", methods=["GET", "POST", "PUT", "DELETE"])
-def dump():
+@app.route("/", defaults={"path": ""}, methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/<path:path>", methods=["GET", "POST", "PUT", "DELETE"])
+def dump(path):
     uuid = uuid4().hex
     req_data = save_request(uuid, request)
+    req_data["path"] = path
     resp = Response(
         json.dumps(req_data, indent=4, default=str), mimetype="application/json"
     )
