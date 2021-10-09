@@ -71,4 +71,4 @@ def dump():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=int(sys.argv[1]), debug=True)
+    app.run('0.0.0.0', port=int(sys.argv[1]), debug=False)
